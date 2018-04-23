@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/11 21:05:53 by alanter           #+#    #+#              #
-#    Updated: 2018/04/19 14:37:55 by alanter          ###   ########.fr        #
+#    Updated: 2018/04/23 16:43:01 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ all : $(NAME)
 $(LIBFT):
 	$(MAKE) -C ./libft/
 
-$(OFILES):
+$(OFILES): $(CFILES)
 	gcc $(CFLAGS) -c -I$(INCLUDE) $(CFILES)
 	mv *.o $(O_DIR)
 

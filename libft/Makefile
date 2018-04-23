@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/11 21:05:53 by alanter           #+#    #+#              #
-#    Updated: 2018/04/19 14:04:25 by alanter          ###   ########.fr        #
+#    Updated: 2018/04/23 16:54:02 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ OFILES = $(patsubst %, $(O_DIR)%.o, $(FILES))
 
 all : $(NAME)
 
-$(OFILES):
+$(OFILES): $(CFILES)
 	gcc $(CFLAGS) -c -I$(INCLUDE) $(CFILES) 
 	mv *.o $(O_DIR)
 

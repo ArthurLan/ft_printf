@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/04/23 16:58:35 by alanter          ###   ########.fr       */
+/*   Updated: 2018/04/23 17:29:31 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_printf(const char *format, ...)
 			case 'c': 
 					c = va_arg(ap, int);
 					//printf("char %c\n", c);
-					ft_putchar(&c);
+					ft_putchar(c);
 					break;
 			}
 	     }

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/04/23 16:44:17 by alanter          ###   ########.fr       */
+/*   Updated: 2018/04/23 16:58:35 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ int	ft_printf(const char *format, ...)
 {
 	va_list ap;
 	int d;
-	char *s;//c, *s;
+	char c, *s;
 
 	va_start(ap, format);
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			//ft_putchar('c');
 			switch(*++format) {
 			case 's':                      
 					s = va_arg(ap, char *);
@@ -34,13 +33,11 @@ int	ft_printf(const char *format, ...)
 					d = va_arg(ap, int);
 					ft_putnbr(d);
 					break;
-					/*
 			case 'c': 
 					c = va_arg(ap, int);
 					//printf("char %c\n", c);
-					ft_putchar(c);
+					ft_putchar(&c);
 					break;
-					*/
 			}
 	     }
 		else

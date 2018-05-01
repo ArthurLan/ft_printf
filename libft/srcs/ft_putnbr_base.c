@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:05:12 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/01 22:15:15 by alanter          ###   ########.fr       */
+/*   Created: 2018/05/01 20:44:16 by alanter           #+#    #+#             */
+/*   Updated: 2018/05/01 20:47:30 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../includes/libft.h"
 
-# include <stdarg.h>
-# include "../libft/includes/libft.h"
-
-int		ft_printf(const char * format, ...);
-
-#endif
+void	ft_putnbr_base(long nbr, int base)
+{
+	if (nbr > base)
+	{
+		ft_putnbr_base(nbr / base, base);
+		ft_putnbr_base(nbr % base, base);
+	}
+	else
+	{
+		if (nbr < 10)
+			ft_putnbr(nbr);
+		else
+			ft_putchar('a' + nbr - 10);
+	}
+}

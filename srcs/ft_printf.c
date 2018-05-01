@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/04/23 19:08:51 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/01 22:17:56 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_printf(const char *format, ...)
 	va_list ap;
 	int d;
 	char c, *s;
+	long p;
 
 	va_start(ap, format);
 	while (*format)
@@ -41,6 +42,9 @@ int	ft_printf(const char *format, ...)
 			case '%':
 					ft_putchar('%');
 					break;
+			case 'p':
+					p = va_arg(ap, long)
+					ft_putnbr_base(p, 16);
 			}
 	     }
 		else

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/01 22:21:00 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/01 22:23:24 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_printf(const char *format, ...)
 					break;
 			case 'p':
 					p = va_arg(ap, long);
+					ft_putstr("0x");
 					ft_putnbr_base(p, 16);
 					break;
 			}

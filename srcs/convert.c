@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:05:12 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/15 19:14:18 by alanter          ###   ########.fr       */
+/*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
+/*   Updated: 2018/05/15 19:14:13 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libftprintf.h"
 
-# include <stdarg.h>
-# include "../libft/includes/libft.h"
+/*penser à la lecture du va_arg dans un autre fichier :
+ * fonctionne comme une variable statique ? ou stack ?
+*/
 
-
-typedef struct	s_printf
+void	convert(t_printf *data, va_list lst, int i, int j)
 {
-	char	*str;
-	char	*result;
-	//int		init;
-	//int		delim;
-	//char	conv;
-}				t_printf;
-
-int		ft_printf(const char * format, ...);
-void	convert(t_printf *data, va_list lst, int i, int j);
-#endif
+	ft_putstr("\nici mon delim : ");
+	ft_putchar(data->str[i]);
+	j++;
+	lst++;
+}

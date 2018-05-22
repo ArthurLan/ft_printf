@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/15 19:14:16 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:23:36 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_is_flag(char c)
 		return (0);
 }
 
-void	store_result(t_printf *data, int i, int j)
+void	store_cleanstr(t_printf *data, int i, int j)
 {
 	char	*to_add;
 
@@ -49,15 +49,16 @@ void parsing(t_printf *data, va_list lst)
 		while(data->str[i] != '%' && data->str[i] != 0)
 			i++;
 		if (i != j)
-			store_result(data, i, j);
+			store_cleanstr(data, i, j);
 		if (data->str[i] == '%')
+		{
 			i++;
-		j = i;
-		while (data->str[i] != 0 && ft_is_flag(data->str[i]))
-			i++;
-		i++;
-		if (i != j)
+			j = i;
+			while (data->str[i] != 0 && ft_is_flag(data->str[i]))
+				i++;
 			convert(data, lst, i, j);
+		i++;
+		}
 	}
 }
 

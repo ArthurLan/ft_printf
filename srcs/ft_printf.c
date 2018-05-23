@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/22 15:23:36 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/22 16:26:41 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void parsing(t_printf *data, va_list lst)
 			j = i;
 			while (data->str[i] != 0 && ft_is_flag(data->str[i]))
 				i++;
+			i++;
 			convert(data, lst, i, j);
-		i++;
 		}
 	}
 }
@@ -82,6 +82,7 @@ int	ft_printf(const char *format, ...)
 
 	data = ft_memalloc(sizeof(t_printf));
 	data->str = ft_strdup(format);
+	CAST = ft_memalloc(18);
 	va_start(lst, format);
 	data->result = ft_memalloc(1);
 	parsing(data, lst);

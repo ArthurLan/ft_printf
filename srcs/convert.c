@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/30 17:09:22 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/30 17:19:16 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	store_nbr(t_printf *data, va_list lst, int i)
 		to_add = ft_itoa(va_arg(lst, int));
 	else if (TYPE == 'u' || TYPE == 'U')
 		to_add = ft_itoa(va_arg(lst, unsigned int));
+	else if (TYPE == 'o' || TYPE == 'O')
+		to_add = ft_ulltoa_base(va_arg(lst, unsigned int), 8);
 	else if (TYPE == '%')
 		to_add = ft_strdup("%");
 	else if (TYPE == 'p')

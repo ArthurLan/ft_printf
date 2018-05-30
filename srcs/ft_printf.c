@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/30 17:09:19 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/30 19:08:35 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_is_flag(char c)
 {
-	if (ft_strchr("#0-+hljz", c) != NULL)
+	if (ft_strchr("#0123456789-+hljz", c) != NULL)
 		return (1);
 	else
 		return (0);

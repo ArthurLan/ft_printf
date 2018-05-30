@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/30 17:19:16 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/30 19:08:33 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	store_nbr(t_printf *data, va_list lst, int i)
 		to_add = ft_strdup("%");
 	else if (TYPE == 'p')
 		to_add = ft_strjoin("0x", ft_ulltoa_base(va_arg(lst, long), 16));
+	else
+		to_add = ft_strdup("\n------still to deal with------\n");
 	data->result = ft_strjoin(data->result, to_add);
 }
 
@@ -49,6 +51,7 @@ void	type_analyse(t_printf *data, int i)
 
 void	convert(t_printf *data, va_list lst, int i)//, int j)
 {
+
 	/*
 	ft_putstr("voilà ma donnée à convertir :");
 	ft_putstr(ft_strndup(&(data->str[j]), i - j));

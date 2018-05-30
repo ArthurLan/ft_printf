@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/23 17:42:21 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/30 17:09:22 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,24 @@
  * fonctionne comme une variable statique ? ou stack ?
 */
 
-void	store_nbr(t_printf *data, va_list lst)//, int j)
+void	store_nbr(t_printf *data, va_list lst, int i)
 {
 	char	*to_add;
 
-	to_add = ft_itoa(va_arg(lst, int));
+	if (TYPE == 's')
+		to_add = ft_strdup(va_arg(lst, char *));
+	else if (TYPE == 'd' || TYPE == 'i' || TYPE == 'D')
+		to_add = ft_itoa(va_arg(lst, int));
+	else if (TYPE == 'u' || TYPE == 'U')
+		to_add = ft_itoa(va_arg(lst, unsigned int));
+	else if (TYPE == '%')
+		to_add = ft_strdup("%");
+	else if (TYPE == 'p')
+		to_add = ft_strjoin("0x", ft_ulltoa_base(va_arg(lst, long), 16));
 	data->result = ft_strjoin(data->result, to_add);
 }
 
+/*
 void	type_analyse(t_printf *data, int i)
 {
 	if (TYPE == 'd')
@@ -33,19 +43,18 @@ void	type_analyse(t_printf *data, int i)
 	else
 		;
 }
+*/
 
-void	convert(t_printf *data, va_list lst, int i, int j)
+void	convert(t_printf *data, va_list lst, int i)//, int j)
 {
+	/*
 	ft_putstr("voilà ma donnée à convertir :");
 	ft_putstr(ft_strndup(&(data->str[j]), i - j));
 	ft_putstr("\n");
 	ft_putstr("voilà mon type :");
 	ft_putchar(TYPE);
 	ft_putstr("\n");
-	type_analyse(data, i);
-	if (!(TYPE == '%'))
-		store_nbr(data, lst);
-	i++;
-	j++;
-	lst++;
+	*/
+	//type_analyse(data, i);
+	store_nbr(data, lst, i);
 }

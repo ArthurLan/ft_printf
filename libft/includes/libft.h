@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 20:45:14 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/01 20:46:48 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/30 16:47:36 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ char			*ft_strndup(const char *src, size_t n);
 size_t			ft_strnlen(const char *str, size_t maxlen);
 
 void			ft_putnbr_base(long nbr, int base);
+char			*ft_ulltoa_base(unsigned long long n, int base);
 #endif

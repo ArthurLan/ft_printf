@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/30 19:08:33 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:58:58 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,55 @@
  * fonctionne comme une variable statique ? ou stack ?
 */
 
-void	store_nbr(t_printf *data, va_list lst, int i)
+// ajouter tous les casts possibles, trouver les équivalences avec les options
+void	store_nbr(t_printf *data, va_list lst)
 {
-	char	*to_add;
-
 	if (TYPE == 's')
-		to_add = ft_strdup(va_arg(lst, char *));
+		TO_ADD = ft_strdup(va_arg(lst, char *));
 	else if (TYPE == 'd' || TYPE == 'i' || TYPE == 'D')
-		to_add = ft_itoa(va_arg(lst, int));
+		TO_ADD = ft_itoa(va_arg(lst, int));
 	else if (TYPE == 'u' || TYPE == 'U')
-		to_add = ft_itoa(va_arg(lst, unsigned int));
+		TO_ADD = ft_itoa(va_arg(lst, unsigned int));
 	else if (TYPE == 'o' || TYPE == 'O')
-		to_add = ft_ulltoa_base(va_arg(lst, unsigned int), 8);
+		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned int), 8);
 	else if (TYPE == '%')
-		to_add = ft_strdup("%");
+		TO_ADD = ft_strdup("%");
 	else if (TYPE == 'p')
-		to_add = ft_strjoin("0x", ft_ulltoa_base(va_arg(lst, long), 16));
+		TO_ADD = ft_strjoin("0x", ft_ulltoa_base(va_arg(lst, long), 16));
 	else
-		to_add = ft_strdup("\n------still to deal with------\n");
-	data->result = ft_strjoin(data->result, to_add);
+		TO_ADD = ft_strdup("\n------still to deal with------\n");
 }
 
 /*
-void	type_analyse(t_printf *data, int i)
-{
-	if (TYPE == 'd')
-		CAST = "int";
-	else if (TYPE == 'u')
-		CAST = "unsigned int";
-	else
-		;
-}
+**hh	1
+**h		2
+**l		3
+**ll	4
+**j		5
+**z		6
 */
 
-void	convert(t_printf *data, va_list lst, int i)//, int j)
+void	type_analyse(t_printf *data, int i, int j)
+{
+	CONV = 0;
+	while (j < i && CONV == 0)
+	{
+		if (data->str[j] == 'h')
+			//ft_strchr(ft_strndup(&(data->str[j]), i-j), 'h') != NULL ? CONV = 1 : CONV = 2;
+			ft_strchr("test", 'h') == NULL ? CONV = 1 : CONV = 2;
+		if (data->str[j] == 'l')
+			;//ft_strchr(ft_strndup(&(data->str[j]), i-j), 'h') != NULL ? CONV = 3 : CONV = 4;
+		if (data->str[j] == 'j')
+			CONV = 5;
+		if (data->str[j] == 'z')
+			CONV = 6;
+		j++;
+	}
+}
+
+
+
+void	convert(t_printf *data, va_list lst, int i, int j)
 {
 
 	/*
@@ -60,6 +75,18 @@ void	convert(t_printf *data, va_list lst, int i)//, int j)
 	ft_putchar(TYPE);
 	ft_putstr("\n");
 	*/
-	//type_analyse(data, i);
-	store_nbr(data, lst, i);
+	type_analyse(data, i, j);
+	TYPE = data->str[i - 1];
+/*	
+	if (TYPE == 's')
+		TO_ADD = ft_strdup(va_arg(lst, char *));
+	else if (TYPE == 'd' || TYPE == 'i' || TYPE == 'D')
+		store_di;
+	else if (TYPE == 'u' || TYPE == 'U')
+		TO_ADD = ft_itoa(va_arg(lst, unsigned int));
+	else if (TYPE == 'o' || TYPE == 'O')
+		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned int), 8);
+*/
+	store_nbr(data, lst);
+	data->result = ft_strjoin(data->result, TO_ADD);
 }

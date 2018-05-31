@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:05:12 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/30 19:08:44 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:59:04 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@
 # include <stdarg.h>
 # include "../libft/includes/libft.h"
 
-# define TYPE data->str[i - 1]
+# define TYPE data->type
 # define CAST data->cast
+# define TO_ADD data->to_add
+# define CONV data->conv
 
 typedef struct	s_printf
 {
 	char	*str;
 	char	*result;
 	char	*cast;
+	char	*to_add;
+	char	type;
+	int		conv;
 	
 	//int		init;
 	//int		delim;
@@ -31,5 +36,5 @@ typedef struct	s_printf
 }				t_printf;
 
 int		ft_printf(const char * format, ...);
-void	convert(t_printf *data, va_list lst, int i);//, int j);
+void	convert(t_printf *data, va_list lst, int i, int j);
 #endif

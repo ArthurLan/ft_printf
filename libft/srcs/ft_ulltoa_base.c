@@ -6,21 +6,21 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 16:20:18 by alanter           #+#    #+#             */
-/*   Updated: 2018/05/30 17:10:07 by alanter          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:31:28 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		size_ulltoa(long n, int base)
+static	int		size_ulltoa(unsigned long long n, int base)
 {
 	int i;
 
 	i = 0;
 	if (n == 0)
 		i = 1;
-	if (n < 0)
-		i++;
+//	if (n < 0)
+//		i++;
 	while (n != 0)
 	{
 		n = n / base;

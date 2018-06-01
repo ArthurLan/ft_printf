@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/01 15:17:31 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/01 15:20:15 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	if (TYPE == 's' || TYPE == 'S' || TYPE == 'c' || TYPE == 'C')
 	{
 		if (TYPE == 'c')
-			TO_ADD = ft_strdup(va_arg(lst, char));
+			TO_ADD = ft_strdup("to do");//va_arg(lst, char));
 		else
 			TO_ADD = ft_strdup(va_arg(lst, char *));
 	}

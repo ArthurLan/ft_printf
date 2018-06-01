@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/01 15:33:52 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/01 20:45:54 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_is_flag(char c)
 {
-	if (ft_strchr("#0123456789-+hljz", c) != NULL)
+	if (ft_strchr(".0123456789#-+ hljz", c) != NULL)
 		return (1);
 	else
 		return (0);
@@ -88,5 +88,5 @@ int	ft_printf(const char *format, ...)
 	s = va_arg(ap, char *);
 	*/
 	ft_putstr(data->result);
-	return (0);
+	return (ft_strlen(data->result));
 }

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/01 15:33:50 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/01 20:45:47 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,14 @@ void	store_uoxp(t_printf *data, va_list lst, int base)
 
 void	type_analyse(t_printf *data, int i, int j)
 {
-	char *flags;
-
 	CONV = 0;
-	flags = NULL;
 	while (j < i && CONV == 0)
 	{
-		flags = ft_strndup(&(data->str[j]), i-j);
+		SCAN = ft_strndup(&(data->str[j]), i-j);
 		if (data->str[j] == 'h')
-			CONV = (ft_strrchr(flags, 'h') != flags) ? 1 : 2;
+			CONV = (ft_strrchr(SCAN, 'h') != SCAN) ? 1 : 2;
 		if (data->str[j] == 'l')
-			CONV = (ft_strrchr(flags, 'l') != flags) ? 4 : 3;
+			CONV = (ft_strrchr(SCAN, 'l') != SCAN) ? 4 : 3;
 		if (data->str[j] == 'j')
 			CONV = 5;
 		if (data->str[j] == 'z')
@@ -93,15 +90,17 @@ void	type_analyse(t_printf *data, int i, int j)
 void	convert(t_printf *data, va_list lst, int i, int j)
 {
 	int base;
-	base = 10;
-	type_analyse(data, i, j);
+
+	CONV = 0;
 	TYPE = data->str[i - 1];
 	base = (ft_strchr("oO", TYPE)) ? 8 : (base = (ft_strchr("xXp", TYPE)) ? 16 : 10);
+	if (ft_strlen(SCAN = ft_strndup(&(data->str[j]), i-j)) > 1)
+		type_analyse(data, i, j);
 	if (TYPE == 's' || TYPE == 'S' || TYPE == 'c' || TYPE == 'C')
 	{
 		if (TYPE == 'c' || TYPE == 'C')
 			TO_ADD = ft_ctostr(va_arg(lst, int));
-		else
+		else //retirer le cas où il y a la precision : gestion dans ft_precision
 			TO_ADD = ft_strdup(va_arg(lst, char *));
 	}
 	else if (TYPE == 'd' || TYPE == 'i' || TYPE == 'D')
@@ -110,6 +109,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 		store_uoxp(data, lst, base);
 	else if (TYPE == '%')
 		TO_ADD = ft_strdup("%");
+	flags(data, i, j);
 	data->result = ft_strjoin(data->result, TO_ADD);
 }
 

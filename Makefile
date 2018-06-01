@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/11 21:05:53 by alanter           #+#    #+#              #
-#    Updated: 2018/05/15 19:06:02 by alanter          ###   ########.fr        #
+#    Updated: 2018/06/01 18:53:03 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 INCLUDE = ./includes/
 SRCS_DIR = ./srcs/
 O_DIR = ./ofiles/
-FILES = ft_printf convert
+FILES = ft_printf convert flags
 LIBFT = libft/libft.a
 
 CFLAGS = -Wall -Wextra -Werror

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/01 15:14:46 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/01 15:17:31 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,12 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	TYPE = data->str[i - 1];
 	base = (ft_strchr("oO", TYPE)) ? 8 : (base = (ft_strchr("xXp", TYPE)) ? 16 : 10);
 	if (TYPE == 's' || TYPE == 'S' || TYPE == 'c' || TYPE == 'C')
-		TO_ADD = ft_strdup(va_arg(lst, char *));
+	{
+		if (TYPE == 'c')
+			TO_ADD = ft_strdup(va_arg(lst, char));
+		else
+			TO_ADD = ft_strdup(va_arg(lst, char *));
+	}
 	else if (TYPE == 'd' || TYPE == 'i' || TYPE == 'D')
 		store_di(data, lst);
 	else if (ft_strchr("oOuUxXp", TYPE) != NULL)

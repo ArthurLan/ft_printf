@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/01 15:01:44 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/01 15:14:46 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	type_analyse(t_printf *data, int i, int j)
 	flags = NULL;
 	while (j < i && CONV == 0)
 	{
-		flags = ft_strndup(&(data->str[j + 1]), i-(j + 1));
+		flags = ft_strndup(&(data->str[j]), i-j);
 		if (data->str[j] == 'h')
-			CONV = (ft_strchr(flags, 'h') != NULL) ? 1 : 2;
+			CONV = (ft_strrchr(flags, 'h') != flags) ? 1 : 2;
 		if (data->str[j] == 'l')
-			CONV = (ft_strchr(flags, 'l') != NULL) ? 4 : 3;
+			CONV = (ft_strrchr(flags, 'l') != flags) ? 4 : 3;
 		if (data->str[j] == 'j')
 			CONV = 5;
 		if (data->str[j] == 'z')

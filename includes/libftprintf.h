@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:05:12 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/01 20:45:57 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/05 23:48:15 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define TO_ADD data->to_add
 # define CONV data->conv
 # define SCAN data->scan
+# define FLAG data->flag
 
 typedef struct	s_printf
 {
@@ -30,6 +31,7 @@ typedef struct	s_printf
 	char	*to_add;
 	char	*scan;
 	char	type;
+	int		*flag;
 	int		conv;
 	
 	//int		init;

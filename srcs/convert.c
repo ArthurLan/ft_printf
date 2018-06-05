@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/01 20:45:47 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/05 23:48:05 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,32 @@
 */
 
 /*
-** ---- Flag conversiont : CONV = ... ----
-**
-** ---- hh	1
-** ---- h	2
-** ---- l	3
-** ---- ll	4
-** ---- j	5
-** ---- z	6
-*/
+ * ** ---- Flag conversiont : CONV = ... ----
+ * **
+ * **---- hh	1
+ * **---- h		2
+ * **---- l		3
+ * **---- ll	4
+ * **---- j		5
+ * **---- z		6
+ * */
 
 // créer un itoa pour les short et les char ?
 
 void	store_di(t_printf *data, va_list lst)
 {
+	char c;
+
+	c = 0;
 	if (CONV == 0 || CONV == 1 || CONV == 2)
 		TO_ADD = ft_itoa(va_arg(lst, int));
-	/*
 	else if (CONV == 1)
-		TO_ADD = ft_itoa(va_arg(lst, char));
+	{
+	//	c =	((char)(va_arg(lst, int)));
+	//	TO_ADD = ft_itoa(c);
+	}
 	else if (CONV == 2)
-		TO_ADD = ft_itoa(va_arg(lst, short int));
-		*/
+		TO_ADD = ft_itoa((short int)(va_arg(lst, int)));
 	else if (CONV == 3)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, long int), 10);
 	else if (CONV == 4)

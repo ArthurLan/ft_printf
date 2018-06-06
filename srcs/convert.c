@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/05 23:48:05 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/06 19:06:18 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 */
 
 /*
- * ** ---- Flag conversiont : CONV = ... ----
+ * ** ---- SPEC = int to deal with specifiers ----
  * **
  * **---- hh	1
  * **---- h		2
@@ -31,62 +31,55 @@
 
 void	store_di(t_printf *data, va_list lst)
 {
-	char c;
-
-	c = 0;
-	if (CONV == 0 || CONV == 1 || CONV == 2)
+	if (SPEC == 0)
 		TO_ADD = ft_itoa(va_arg(lst, int));
-	else if (CONV == 1)
-	{
-	//	c =	((char)(va_arg(lst, int)));
-	//	TO_ADD = ft_itoa(c);
-	}
-	else if (CONV == 2)
+	else if (SPEC == 1)
+		TO_ADD = ft_itoa((char)(va_arg(lst, int)));
+	else if (SPEC == 2)
 		TO_ADD = ft_itoa((short int)(va_arg(lst, int)));
-	else if (CONV == 3)
-		TO_ADD = ft_ulltoa_base(va_arg(lst, long int), 10);
-	else if (CONV == 4)
-		TO_ADD = ft_ulltoa_base(va_arg(lst, long long int), 10);
-	else if (CONV == 5)
-		TO_ADD = ft_ulltoa_base(va_arg(lst, intmax_t), 10);
-	else if (CONV == 6)
-		TO_ADD = ft_ulltoa_base(va_arg(lst, size_t), 10);
+	else if (SPEC == 3)
+		TO_ADD = ft_lltoa_base(va_arg(lst, long int), 10);
+	else if (SPEC == 4)
+		TO_ADD = ft_lltoa_base(va_arg(lst, long long int), 10);
+	else if (SPEC == 5)
+		TO_ADD = ft_lltoa_base(va_arg(lst, intmax_t), 10);
+	else if (SPEC == 6)
+		TO_ADD = ft_lltoa_base(va_arg(lst, size_t), 10);
 }
 
+//verifier SPEC 1 et 2, les parentheses
 void	store_uoxp(t_printf *data, va_list lst, int base)
 {
-	if (CONV == 0 || CONV == 1 || CONV == 2)
+	if (SPEC == 0)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned int), base);
-	/*
-	else if (CONV == 1)
-		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned char), base);
-	else if (CONV == 2)
-		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned short int), base);
-		*/
-	else if (CONV == 3)
+	else if (SPEC == 1)
+		TO_ADD = ft_ulltoa_base((unsigned char)(va_arg(lst, int)), base);
+	else if (SPEC == 2)
+		TO_ADD = ft_ulltoa_base((unsigned short int)(va_arg(lst, int)), base);
+	else if (SPEC == 3)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned long int), base);
-	else if (CONV == 4)
+	else if (SPEC == 4)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned long long int), base);
-	else if (CONV == 5)
+	else if (SPEC == 5)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, uintmax_t), base);
-	else if (CONV == 6)
+	else if (SPEC == 6)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, size_t), base);
 }
 
 void	type_analyse(t_printf *data, int i, int j)
 {
-	CONV = 0;
-	while (j < i && CONV == 0)
+	SPEC = 0;
+	while (j < i && SPEC == 0)
 	{
 		SCAN = ft_strndup(&(data->str[j]), i-j);
 		if (data->str[j] == 'h')
-			CONV = (ft_strrchr(SCAN, 'h') != SCAN) ? 1 : 2;
+			SPEC = (ft_strrchr(SCAN, 'h') != SCAN) ? 1 : 2;
 		if (data->str[j] == 'l')
-			CONV = (ft_strrchr(SCAN, 'l') != SCAN) ? 4 : 3;
+			SPEC = (ft_strrchr(SCAN, 'l') != SCAN) ? 4 : 3;
 		if (data->str[j] == 'j')
-			CONV = 5;
+			SPEC = 5;
 		if (data->str[j] == 'z')
-			CONV = 6;
+			SPEC = 6;
 		j++;
 	}
 }
@@ -95,7 +88,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 {
 	int base;
 
-	CONV = 0;
+	SPEC = 0;
 	TYPE = data->str[i - 1];
 	base = (ft_strchr("oO", TYPE)) ? 8 : (base = (ft_strchr("xXp", TYPE)) ? 16 : 10);
 	if (ft_strlen(SCAN = ft_strndup(&(data->str[j]), i-j)) > 1)
@@ -114,7 +107,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	else if (TYPE == '%')
 		TO_ADD = ft_strdup("%");
 	flags(data, i, j);
-	data->result = ft_strjoin(data->result, TO_ADD);
+	data->result = ft_strjoinfree(data->result, TO_ADD);
 }
 
 
@@ -130,7 +123,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 /*
  *
 	ft_putstr("\nMon option d'analyse est égale à : ");
-	ft_putnbr(CONV);
+	ft_putnbr(SPEC);
 	ft_putstr("\n");
 	ft_putstr("\nVoilà mon TYPE :");
 	ft_putchar(TYPE);
@@ -140,7 +133,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	*/
 	/*
 	ft_putstr("\nMon option d'analyse est égale à : ");
-	ft_putnbr(CONV);
+	ft_putnbr(SPEC);
 	ft_putstr("\n");
 	*/
 /*

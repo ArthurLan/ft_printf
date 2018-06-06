@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/11 21:05:53 by alanter           #+#    #+#              #
-#    Updated: 2018/06/01 15:27:38 by alanter          ###   ########.fr        #
+#    Updated: 2018/06/06 17:21:37 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ ft_strnstr ft_lstnew ft_lstdelone ft_lstdel ft_lstadd \
 ft_lstiter ft_lstmap ft_islower ft_isupper ft_str_is_lowercase \
 ft_str_is_uppercase ft_str_is_numeric ft_str_is_alpha \
 ft_isblank ft_strtrimc ft_strndup ft_strnlen \
-ft_putnbr_base ft_ulltoa_base ft_ctostr
+ft_putnbr_base ft_ulltoa_base ft_lltoa_base ft_ctostr\
+ft_strjoinfree ft_strupcase
 
 CFLAGS = -Wall -Wextra -Werror
 

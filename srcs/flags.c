@@ -6,48 +6,48 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/05 23:48:18 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/06 17:31:41 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
 /*
- * ** FLAG = gere la presence de flags
+ * ** FLAG = tab of int to deal with flags 
  * ** FLAG[0] = #;
  * ** FLAG[1] = +;
  * ** FLAG[2] = space;
  * ** FLAG[3] = -;
  * ** FLAG[4] = 0;
- * ** FLAG[5] = padding;
+ * ** FLAG[5] = width;
  * ** FLAG[6] = precision;
  * ** FLAG[7] = where add my 0;
  * */
 
-void	scan_flag(t_printf *data)
+void	scan_flag(t_printf *data, char *scan)
 {
 		int state;
 
 		state = 0;
-		while (*SCAN != 0)
+		while (*scan != 0)
 		{
-			state = (state == 2 && *SCAN == '.') ? 3 : state;
-			state = (*SCAN == '.' && state < 2) ? 2 : state;
-			if (*SCAN == '#')
+			state = (state == 2 && *scan == '.') ? 3 : state;
+			state = (*scan == '.' && state < 2) ? 2 : state;
+			if (*scan == '#')
 				FLAG[0] = 1;
-			else if (*SCAN == '+')
+			else if (*scan == '+')
 				FLAG[1] = 1;
-			else if (*SCAN == ' ')
+			else if (*scan == ' ')
 				FLAG[2] = 1;
-			else if (*SCAN == '-')
+			else if (*scan == '-' && (FLAG[4] = 0))
 				FLAG[3] = 1;
-			else if (state == 0 && *SCAN == '0')
+			else if (state == 0 && *scan == '0')
 				FLAG[4] = 1;
-			else if (state == 0 && *SCAN > '0' && *SCAN <= '9' && (state = 1))
-				FLAG[5] = ft_atoi(SCAN);
-			else if (state == 2 && *SCAN > '0' && *SCAN <= '9' && (state = 3))
-				FLAG[6] = ft_atoi(SCAN) != 0 ? ft_atoi(SCAN) : -1;
-			SCAN++;
+			else if (state == 0 && *scan > '0' && *scan <= '9' && (state = 1))
+				FLAG[5] = ft_atoi(scan);
+			else if (state == 2 && *scan > '0' && *scan <= '9' && (state = 3))
+				FLAG[6] = ft_atoi(scan) != 0 ? ft_atoi(scan) : -1;
+			scan++;
 		}
 		FLAG[6] = (((state == 2 || state == 3) && FLAG[6] == 0) ?
 				-1 : FLAG[6]);
@@ -55,26 +55,43 @@ void	scan_flag(t_printf *data)
 
 void	flag_char(t_printf *data)
 {
-	ft_putstr("\nflag char\n");
+	//ft_putstr("\nflag char\n");
 	ft_putstr(SCAN);
 }
 
 void	flag_int(t_printf *data)
 {
-	ft_putstr("\nflag int\n");
-	ft_putstr(SCAN);
+	char *flag;
+
+	flag = NULL;
+	if (FLAG[6] > 0 && ((ft_strlen(TO_ADD) - FLAG[6]) > 0))
+	{
+			flag = ft_memalloc(FLAG[6] - ft_strlen(TO_ADD) + 1);
+			flag = ft_memset(flag, '0', FLAG[6] - ft_strlen(TO_ADD));
+			TO_ADD = ft_strjoin(flag, TO_ADD);
+	}
+	//Créer une fonction ft_strjoinfree_a
+	//Créer une fonction ft_strjoinfree_b
+	if ((FLAG[0] == 1 && (TYPE == 'x' || TYPE == 'X')) || TYPE == 'p')
+			TO_ADD = ft_strjoin("0x", TO_ADD);
+	if (TYPE == 'X')
+			ft_strupcase(TO_ADD);
+
+
 }
 
 void	flags(t_printf *data, int i, int j)
 {
 	SCAN = ft_strndup(&(data->str[j]), i-j);
 	data->flag = ft_memalloc(9);
-	scan_flag(data);
-
-	if (ft_strchr("cCsS", TYPE))
-		flag_char(data);
-	else if (ft_strchr("idDuUoOxXp", TYPE))
-		flag_int(data);
+	if (ft_strlen(SCAN) > 1 || TYPE == 'p')
+	{
+		scan_flag(data, SCAN);
+		if (ft_strchr("cCsS", TYPE))
+			flag_char(data);
+		else if (ft_strchr("idDuUoOxXp", TYPE))
+			flag_int(data);
+	}
 }
 
 /*

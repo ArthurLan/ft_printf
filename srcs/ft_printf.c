@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/06 16:55:36 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/07 22:28:49 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		ft_is_flag(char c)
 void	store_cleanstr(t_printf *data, int i, int j)
 {
 	TO_ADD = ft_strndup(&(data->str[j]), i - j);
-	data->result = ft_strjoinfree(data->result, TO_ADD);
+	data->result = ft_strjoin(data->result, TO_ADD);
+	//data->result = ft_strjoinfree(data->result, TO_ADD);
 }
 
 /*

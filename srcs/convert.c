@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/06 19:06:18 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/07 22:28:46 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	store_di(t_printf *data, va_list lst)
 //verifier SPEC 1 et 2, les parentheses
 void	store_uoxp(t_printf *data, va_list lst, int base)
 {
-	if (SPEC == 0)
+	if (SPEC == 0 && TYPE != 'p')
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned int), base);
 	else if (SPEC == 1)
 		TO_ADD = ft_ulltoa_base((unsigned char)(va_arg(lst, int)), base);
 	else if (SPEC == 2)
 		TO_ADD = ft_ulltoa_base((unsigned short int)(va_arg(lst, int)), base);
-	else if (SPEC == 3)
+	else if (SPEC == 3 || TYPE == 'p')
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned long int), base);
 	else if (SPEC == 4)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned long long int), base);
@@ -107,7 +107,8 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	else if (TYPE == '%')
 		TO_ADD = ft_strdup("%");
 	flags(data, i, j);
-	data->result = ft_strjoinfree(data->result, TO_ADD);
+	//data->result = ft_strjoinfree(data->result, TO_ADD);
+	data->result = ft_strjoin(data->result, TO_ADD);
 }
 
 

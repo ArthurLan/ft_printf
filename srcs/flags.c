@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/06 17:31:41 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/07 22:28:40 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	scan_flag(t_printf *data, char *scan)
 				FLAG[0] = 1;
 			else if (*scan == '+')
 				FLAG[1] = 1;
-			else if (*scan == ' ')
+			else if (*scan == ' ' && (ft_strchr(SCAN, '+') == NULL))
 				FLAG[2] = 1;
-			else if (*scan == '-' && (FLAG[4] = 0))
+			else if (*scan == '-')// && (FLAG[4] = 0))
 				FLAG[3] = 1;
-			else if (state == 0 && *scan == '0')
+			else if (state == 0 && *scan == '0' && (ft_strchr(SCAN, '-') == NULL))
 				FLAG[4] = 1;
 			else if (state == 0 && *scan > '0' && *scan <= '9' && (state = 1))
 				FLAG[5] = ft_atoi(scan);
@@ -64,7 +64,7 @@ void	flag_int(t_printf *data)
 	char *flag;
 
 	flag = NULL;
-	if (FLAG[6] > 0 && ((ft_strlen(TO_ADD) - FLAG[6]) > 0))
+	if (FLAG[6] > 0 && FLAG[6] > (int)ft_strlen(TO_ADD))
 	{
 			flag = ft_memalloc(FLAG[6] - ft_strlen(TO_ADD) + 1);
 			flag = ft_memset(flag, '0', FLAG[6] - ft_strlen(TO_ADD));
@@ -76,14 +76,27 @@ void	flag_int(t_printf *data)
 			TO_ADD = ft_strjoin("0x", TO_ADD);
 	if (TYPE == 'X')
 			ft_strupcase(TO_ADD);
-
-
+	if (FLAG[0] == 1 && (TYPE == 'o' || TYPE == 'O'))
+			TO_ADD = ft_strjoin("0", TO_ADD);
+	if (FLAG[1] == 1 && ft_strchr("idD", TYPE) && (ft_atoi(TO_ADD) >= 0))
+		TO_ADD = ft_strjoin("+", TO_ADD);
+	if (FLAG[2] == 1 && ft_strchr("idD", TYPE) && (ft_atoi(TO_ADD) >= 0))
+		TO_ADD = ft_strjoin(" ", TO_ADD);
+	
+	if (FLAG[5] > 0 && FLAG[5] > (int)ft_strlen(TO_ADD))
+	{
+		flag = ft_memalloc(FLAG[5] - ft_strlen(TO_ADD) + 1);
+		flag = ft_memset(flag, ' ', FLAG[5] - ft_strlen(TO_ADD));
+		TO_ADD = (FLAG[3] == 0) ? ft_strjoin(flag, TO_ADD) : ft_strjoin(TO_ADD, flag);
+	}
+	
 }
 
 void	flags(t_printf *data, int i, int j)
 {
+
 	SCAN = ft_strndup(&(data->str[j]), i-j);
-	data->flag = ft_memalloc(9);
+	FLAG = ft_memalloc(sizeof(int) * 8);
 	if (ft_strlen(SCAN) > 1 || TYPE == 'p')
 	{
 		scan_flag(data, SCAN);

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/08 13:01:47 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/08 19:27:26 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	scan_flag(t_printf *data, char *scan)
 void	flag_char(t_printf *data)
 {
 	//ft_putstr("\nflag char\n");
-	ft_putstr(SCAN);
+	if (FLAG[6] > 0)
+	{
+	if (ft_strlen(
+	TO_ADD = ft_strdup(va_arg(lst, char *));
 }
 
 void	width_int(t_printf *data)

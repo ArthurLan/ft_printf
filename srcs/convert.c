@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/08 12:32:30 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/08 19:27:22 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
  * **---- j		5
  * **---- z		6
  * */
-
-// créer un itoa pour les short et les char ?
 
 void	store_di(t_printf *data, va_list lst)
 {
@@ -96,7 +94,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	if (TYPE == 's' || TYPE == 'S' || TYPE == 'c' || TYPE == 'C')
 	{
 		if (TYPE == 'c' || TYPE == 'C')
-			TO_ADD = ft_ctostr(va_arg(lst, int));
+			TO_ADD = ft_ctostr((char)(va_arg(lst, int)));
 		else //retirer le cas où il y a la precision : gestion dans ft_precision
 			TO_ADD = ft_strdup(va_arg(lst, char *));
 	}

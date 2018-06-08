@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/08 12:53:27 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/08 13:01:47 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ void	width_int(t_printf *data)
 		*sharp = '0';
 		*(ft_strchr(TO_ADD, '0') + 1) = 'x';
 	}
-	
+	if ((sharp = ft_strchr(TO_ADD, '+')))
+	{
+		*sharp = '0';
+		*(ft_strchr(TO_ADD, '0')) = '+';
+	}
 }
 
 void	flag_int(t_printf *data)

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/08 12:32:32 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/08 12:53:27 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	width_int(t_printf *data)
 	int zero_space;	
 	char	*sharp;
 
+	FLAG[4] = (FLAG[6] < FLAG[5] && FLAG[6]) ? 0 : FLAG[4];
 	zero_space = (FLAG[4] == 1) ? '0' : ' ';
 	ADD_FLAG = ft_memalloc(FLAG[5] - ft_strlen(TO_ADD) + 1);
 	ADD_FLAG = ft_memset(ADD_FLAG, zero_space, FLAG[5] - ft_strlen(TO_ADD));
@@ -102,8 +103,6 @@ void	flag_int(t_printf *data)
 		TO_ADD = ft_strjoin(" ", TO_ADD);
 	if (FLAG[5] > 0 && FLAG[5] > (int)ft_strlen(TO_ADD))
 		width_int(data);
-	if (TYPE == 'X')
-			ft_strupcase(TO_ADD);
 	
 	
 }
@@ -121,6 +120,8 @@ void	flags(t_printf *data, int i, int j)
 		else if (ft_strchr("idDuUoOxXp", TYPE))
 			flag_int(data);
 	}
+	if (TYPE == 'X')
+			ft_strupcase(TO_ADD);
 }
 
 /*

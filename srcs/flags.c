@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/07 22:28:40 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/08 12:32:32 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,52 @@ void	flag_char(t_printf *data)
 	ft_putstr(SCAN);
 }
 
+void	width_int(t_printf *data)
+{
+	int zero_space;	
+	char	*sharp;
+
+	zero_space = (FLAG[4] == 1) ? '0' : ' ';
+	ADD_FLAG = ft_memalloc(FLAG[5] - ft_strlen(TO_ADD) + 1);
+	ADD_FLAG = ft_memset(ADD_FLAG, zero_space, FLAG[5] - ft_strlen(TO_ADD));
+	if (FLAG[3] == 0) 
+		TO_ADD = ft_strjoin(ADD_FLAG, TO_ADD);
+	else
+		TO_ADD = ft_strjoin(TO_ADD, ADD_FLAG);
+	if ((sharp = ft_strchr(TO_ADD, 'x')))
+	{
+		*sharp = '0';
+		*(ft_strchr(TO_ADD, '0') + 1) = 'x';
+	}
+	
+}
+
 void	flag_int(t_printf *data)
 {
 	char *flag;
 
 	flag = NULL;
+	if (FLAG[0] == 1 && (TYPE == 'o' || TYPE == 'O') && (ft_atoi(TO_ADD) != 0))
+			TO_ADD = ft_strjoin("0", TO_ADD);
 	if (FLAG[6] > 0 && FLAG[6] > (int)ft_strlen(TO_ADD))
 	{
-			flag = ft_memalloc(FLAG[6] - ft_strlen(TO_ADD) + 1);
-			flag = ft_memset(flag, '0', FLAG[6] - ft_strlen(TO_ADD));
-			TO_ADD = ft_strjoin(flag, TO_ADD);
+			ADD_FLAG = ft_memalloc(FLAG[6] - ft_strlen(TO_ADD) + 1);
+			ADD_FLAG = ft_memset(ADD_FLAG, '0', FLAG[6] - ft_strlen(TO_ADD));
+			TO_ADD = ft_strjoin(ADD_FLAG, TO_ADD);
 	}
 	//Créer une fonction ft_strjoinfree_a
 	//Créer une fonction ft_strjoinfree_b
 	if ((FLAG[0] == 1 && (TYPE == 'x' || TYPE == 'X')) || TYPE == 'p')
 			TO_ADD = ft_strjoin("0x", TO_ADD);
-	if (TYPE == 'X')
-			ft_strupcase(TO_ADD);
-	if (FLAG[0] == 1 && (TYPE == 'o' || TYPE == 'O'))
-			TO_ADD = ft_strjoin("0", TO_ADD);
 	if (FLAG[1] == 1 && ft_strchr("idD", TYPE) && (ft_atoi(TO_ADD) >= 0))
 		TO_ADD = ft_strjoin("+", TO_ADD);
 	if (FLAG[2] == 1 && ft_strchr("idD", TYPE) && (ft_atoi(TO_ADD) >= 0))
 		TO_ADD = ft_strjoin(" ", TO_ADD);
-	
 	if (FLAG[5] > 0 && FLAG[5] > (int)ft_strlen(TO_ADD))
-	{
-		flag = ft_memalloc(FLAG[5] - ft_strlen(TO_ADD) + 1);
-		flag = ft_memset(flag, ' ', FLAG[5] - ft_strlen(TO_ADD));
-		TO_ADD = (FLAG[3] == 0) ? ft_strjoin(flag, TO_ADD) : ft_strjoin(TO_ADD, flag);
-	}
+		width_int(data);
+	if (TYPE == 'X')
+			ft_strupcase(TO_ADD);
+	
 	
 }
 

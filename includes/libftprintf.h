@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:05:12 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/07 22:28:51 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/08 12:32:34 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
  */
 
 # define TO_ADD data->to_add
+# define ADD_FLAG data->add_flag
 # define SCAN data->scan
 # define TYPE data->type
 # define FLAG data->flag
@@ -37,6 +38,7 @@ typedef struct	s_printf
 	char	*str;
 	char	*result;
 	char	*to_add;
+	char	*add_flag;
 	char	*scan;
 	char	type;
 	int		*flag;

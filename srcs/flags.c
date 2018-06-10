@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/08 19:27:26 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/10 11:44:37 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,7 @@ void	scan_flag(t_printf *data, char *scan)
 				-1 : FLAG[6]);
 }
 
-void	flag_char(t_printf *data)
-{
-	//ft_putstr("\nflag char\n");
-	if (FLAG[6] > 0)
-	{
-	if (ft_strlen(
-	TO_ADD = ft_strdup(va_arg(lst, char *));
-}
-
-void	width_int(t_printf *data)
+void	width(t_printf *data)
 {
 	int zero_space;	
 	char	*sharp;
@@ -87,6 +78,19 @@ void	width_int(t_printf *data)
 	}
 }
 
+void	flag_char(t_printf *data)
+{
+	//ft_putstr("\nflag char\n");
+	char *tmp;
+
+	tmp = TO_ADD;
+	if (FLAG[6] > 0 && (ft_strlen(TO_ADD) > (size_t)FLAG[6]))
+			TO_ADD = ft_strndup(TO_ADD, FLAG[6]);
+	else if (FLAG[5] > 0 && (ft_strlen(TO_ADD) < (size_t)FLAG[5]))
+		width(data);
+	free(tmp);
+}
+
 void	flag_int(t_printf *data)
 {
 	char *flag;
@@ -109,7 +113,7 @@ void	flag_int(t_printf *data)
 	if (FLAG[2] == 1 && ft_strchr("idD", TYPE) && (ft_atoi(TO_ADD) >= 0))
 		TO_ADD = ft_strjoin(" ", TO_ADD);
 	if (FLAG[5] > 0 && FLAG[5] > (int)ft_strlen(TO_ADD))
-		width_int(data);
+		width(data);
 	
 	
 }
@@ -122,11 +126,11 @@ void	flags(t_printf *data, int i, int j)
 	if (ft_strlen(SCAN) > 1 || TYPE == 'p')
 	{
 		scan_flag(data, SCAN);
-		if (ft_strchr("cCsS", TYPE))
-			flag_char(data);
-		else if (ft_strchr("idDuUoOxXp", TYPE))
+		if (ft_strchr("idDuUoOxXp", TYPE))
 			flag_int(data);
 	}
+	if (ft_strchr("cCsS", TYPE))
+		flag_char(data);
 	if (TYPE == 'X')
 			ft_strupcase(TO_ADD);
 }

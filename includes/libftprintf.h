@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:05:12 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/10 11:44:40 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/12 18:42:34 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdarg.h>
 # include "../libft/includes/libft.h"
+# include <wchar.h>
 
 /*
  * **	-- Every macro is used to access data structure MAJ = data->maj --

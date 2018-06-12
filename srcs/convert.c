@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/10 11:44:34 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/12 18:42:28 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,17 @@ void	store_uoxp(t_printf *data, va_list lst, int base)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, size_t), base);
 }
 
+void	store_cs(t_printf *data, va_list lst)
+{
+	if ((SPEC == 3 && TYPE == 'c') || TYPE == 'C')
+			TO_ADD = ft_ctostr((wint_t)(va_arg(lst, wint_t)));
+	else if ((SPEC == 3 && TYPE == 's') || TYPE == 'S')
+			TO_ADD = ft_strdup(va_arg(lst, wchar_t *));
+	else if (TYPE == 'c')
+			TO_ADD = ft_ctostr((char)(va_arg(lst, int)));
+	else
+			TO_ADD = ft_strdup(va_arg(lst, char *));
+}
 void	type_analyse(t_printf *data, int i, int j)
 {
 	SPEC = 0;
@@ -93,10 +104,6 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 		type_analyse(data, i, j);
 	if (TYPE == 's' || TYPE == 'S' || TYPE == 'c' || TYPE == 'C')
 	{
-		if (TYPE == 'c' || TYPE == 'C')
-			TO_ADD = ft_ctostr((char)(va_arg(lst, int)));
-		else //retirer le cas où il y a la precision : gestion dans ft_precision
-			TO_ADD = ft_strdup(va_arg(lst, char *));
 	}
 	else if (TYPE == 'd' || TYPE == 'i' || TYPE == 'D')
 		store_di(data, lst);

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 20:45:14 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/06 17:21:17 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/12 18:42:19 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,9 @@ char			*ft_lltoa_base(long long n, int base);
 char 			*ft_ctostr(char c);
 char			*ft_strjoinfree(char *s1, char *s2);
 void			ft_strupcase(char *str);
+void			ft_putwchar(wchar_t c);
+void			ft_putwstr(char *str);
+int				ft_charwlen(wchar_t c);
+size_t			ft_strwlen(wchar_t *str);
+char    		*ft_wtostr(wchar_t *wstr);
 #endif

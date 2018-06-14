@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/12 18:42:26 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/14 02:38:41 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void	width(t_printf *data)
 		*sharp = '0';
 		*(ft_strchr(TO_ADD, '0')) = '+';
 	}
+	if ((sharp = ft_strchr(TO_ADD, '-')) && (*sharp = '0'))
+		*(ft_strchr(TO_ADD, '0')) = '-';
+	free(ADD_FLAG);
 }
 
 void	flag_char(t_printf *data)
@@ -85,8 +88,8 @@ void	flag_char(t_printf *data)
 
 	tmp = TO_ADD;
 	if (FLAG[6] > 0 && (ft_strlen(TO_ADD) > (size_t)FLAG[6]))
-			TO_ADD = ft_strndup(TO_ADD, FLAG[6]);
-	else if (FLAG[5] > 0 && (ft_strlen(TO_ADD) < (size_t)FLAG[5]))
+		TO_ADD = ft_strndup(TO_ADD, FLAG[6]);
+	if (FLAG[5] > 0 && (ft_strlen(TO_ADD) < (size_t)FLAG[5]))
 		width(data);
 	free(tmp);
 }
@@ -104,18 +107,23 @@ void	flag_int(t_printf *data)
 			ADD_FLAG = ft_memset(ADD_FLAG, '0', FLAG[6] - ft_strlen(TO_ADD));
 			TO_ADD = ft_strjoin(ADD_FLAG, TO_ADD);
 	}
+	if (FLAG[6] == -1 && ft_strchr("idDoOxX", TYPE) && (ft_atoi(TO_ADD) == 0))
+	{
+		free(TO_ADD);
+		TO_ADD = (ft_strchr("oO", TYPE) && FLAG[0] == 1) ?
+			ft_strdup("0") : ft_strdup("");
+	}
 	//Créer une fonction ft_strjoinfree_a
 	//Créer une fonction ft_strjoinfree_b
+	//Créer une fonction ft_strswitch
 	if ((FLAG[0] == 1 && (TYPE == 'x' || TYPE == 'X')) || TYPE == 'p')
-			TO_ADD = ft_strjoin("0x", TO_ADD);
+			TO_ADD = (ft_atoi(TO_ADD) > 0) ? ft_strjoin("0x", TO_ADD) : TO_ADD;
 	if (FLAG[1] == 1 && ft_strchr("idD", TYPE) && (ft_atoi(TO_ADD) >= 0))
 		TO_ADD = ft_strjoin("+", TO_ADD);
 	if (FLAG[2] == 1 && ft_strchr("idD", TYPE) && (ft_atoi(TO_ADD) >= 0))
 		TO_ADD = ft_strjoin(" ", TO_ADD);
 	if (FLAG[5] > 0 && FLAG[5] > (int)ft_strlen(TO_ADD))
 		width(data);
-	
-	
 }
 
 void	flags(t_printf *data, int i, int j)
@@ -133,6 +141,11 @@ void	flags(t_printf *data, int i, int j)
 		flag_char(data);
 	if (TYPE == 'X')
 			ft_strupcase(TO_ADD);
+	if (TYPE == '%')
+	{
+		FLAG[6] = 0;
+		flag_int(data);
+	}
 }
 
 /*

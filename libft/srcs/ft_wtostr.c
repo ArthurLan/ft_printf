@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 18:01:42 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/12 18:42:05 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/13 15:27:12 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	storew(wchar_t *wstr, char *str, size_t size, int i)
 			str[i++] =(((*wstr >> 6) & 0x3F) | 0x80);
 			str[i++] =((*wstr & 0x3F) | 0x80);
 		}
+		wstr++;
 	}
 }
 

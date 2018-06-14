@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 15:17:26 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/06 15:17:31 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/14 02:07:02 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ char	*ft_strjoinfree(char *s1, char *s2)
 		j++;
 	}
 	d[i] = 0;
-	free(s1);
-	free(s2);
+	if (s1 != NULL)
+		free(s1);
+	if (s2 != NULL)
+		free(s2);
 	return (d);
 }

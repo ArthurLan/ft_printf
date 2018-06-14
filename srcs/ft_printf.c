@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/12 18:42:32 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/14 02:38:34 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	ft_printf(const char *format, ...)
 {
 	va_list lst;
 	t_printf *data;
+	int			ret;
 
 	data = ft_memalloc(sizeof(t_printf));
 	data->str = ft_strdup(format);
@@ -88,5 +89,8 @@ int	ft_printf(const char *format, ...)
 	s = va_arg(ap, char *);
 	*/
 	ft_putstr(data->result);
-	return (ft_strlen(data->result));
+	ret = ft_strlen(data->result);
+	free(data->result);
+	free(data->str);
+	return (ret);
 }

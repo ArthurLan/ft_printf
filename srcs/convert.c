@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/12 18:42:28 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/14 02:38:36 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	store_cs(t_printf *data, va_list lst)
 	if ((SPEC == 3 && TYPE == 'c') || TYPE == 'C')
 			TO_ADD = ft_ctostr((wint_t)(va_arg(lst, wint_t)));
 	else if ((SPEC == 3 && TYPE == 's') || TYPE == 'S')
-			TO_ADD = ft_strdup(va_arg(lst, wchar_t *));
+			TO_ADD = ft_wtostr(va_arg(lst, wchar_t *));
 	else if (TYPE == 'c')
 			TO_ADD = ft_ctostr((char)(va_arg(lst, int)));
 	else
@@ -103,8 +103,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	if (ft_strlen(SCAN = ft_strndup(&(data->str[j]), i-j)) > 1)
 		type_analyse(data, i, j);
 	if (TYPE == 's' || TYPE == 'S' || TYPE == 'c' || TYPE == 'C')
-	{
-	}
+		store_cs(data, lst);
 	else if (TYPE == 'd' || TYPE == 'i' || TYPE == 'D')
 		store_di(data, lst);
 	else if (ft_strchr("oOuUxXp", TYPE) != NULL)

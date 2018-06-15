@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/14 02:38:34 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/15 18:39:06 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int		ft_is_flag(char c)
 void	store_cleanstr(t_printf *data, int i, int j)
 {
 	TO_ADD = ft_strndup(&(data->str[j]), i - j);
-	data->result = ft_strjoin(data->result, TO_ADD);
-	//data->result = ft_strjoinfree(data->result, TO_ADD);
+	if (data->result == NULL)
+		data->result = ft_strdup(TO_ADD);
+	else
+		data->result = ft_strjoin(data->result, TO_ADD);
+		//data->result = ft_strjoinfree(data->result, TO_ADD);
 }
 
 /*
@@ -83,14 +86,17 @@ int	ft_printf(const char *format, ...)
 	data = ft_memalloc(sizeof(t_printf));
 	data->str = ft_strdup(format);
 	va_start(lst, format);
-	data->result = ft_memalloc(1);
+	//data->result = ft_memalloc(2);
 	parsing(data, lst);
 	/* pour fonction de gestion du flag
 	s = va_arg(ap, char *);
 	*/
 	ft_putstr(data->result);
 	ret = ft_strlen(data->result);
-	free(data->result);
-	free(data->str);
+	if (data->result)
+		free(data->result);
+	if (data->str)
+		free(data->str);
+	va_end(lst);
 	return (ret);
 }

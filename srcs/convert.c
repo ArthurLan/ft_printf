@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/14 02:38:36 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/15 18:39:09 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	store_uoxp(t_printf *data, va_list lst, int base)
 {
 	if (SPEC == 0 && TYPE != 'p')
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned int), base);
-	else if (SPEC == 1)
+	else if (SPEC == 1 && TYPE != 'U')
 		TO_ADD = ft_ulltoa_base((unsigned char)(va_arg(lst, int)), base);
-	else if (SPEC == 2)
+	else if (SPEC == 2 && TYPE != 'U')
 		TO_ADD = ft_ulltoa_base((unsigned short int)(va_arg(lst, int)), base);
 	else if (SPEC == 3 || TYPE == 'p')
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned long int), base);
-	else if (SPEC == 4)
+	else if (SPEC == 4 || TYPE == 'U')
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned long long int), base);
 	else if (SPEC == 5)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, uintmax_t), base);
@@ -74,6 +74,11 @@ void	store_cs(t_printf *data, va_list lst)
 			TO_ADD = ft_ctostr((char)(va_arg(lst, int)));
 	else
 			TO_ADD = ft_strdup(va_arg(lst, char *));
+	if (TO_ADD == NULL && ft_strchr("sS", TYPE))
+		TO_ADD = ft_strdup("(null)");
+	if (TO_ADD == NULL && ft_strchr("cC", TYPE))
+		TO_ADD = ft_wtostr(0);
+
 }
 void	type_analyse(t_printf *data, int i, int j)
 {
@@ -112,7 +117,17 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 		TO_ADD = ft_strdup("%");
 	flags(data, i, j);
 	//data->result = ft_strjoinfree(data->result, TO_ADD);
-	data->result = ft_strjoin(data->result, TO_ADD);
+	//data->result = ft_strjoin(data->result, TO_ADD);
+	
+	//ft_putendl("Voilà mon TO_ADD :");
+	//ft_putendl(TO_ADD);
+	//ft_putendl("Voilà mon data->result :");
+	//ft_putendl(data->result);
+
+	if (data->result == NULL)
+		data->result = ft_strdup(TO_ADD);
+	else
+		data->result = ft_strjoin(data->result, TO_ADD);
 }
 
 

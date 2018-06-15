@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/14 02:38:41 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/15 18:39:11 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	flag_char(t_printf *data)
 		TO_ADD = ft_strndup(TO_ADD, FLAG[6]);
 	if (FLAG[5] > 0 && (ft_strlen(TO_ADD) < (size_t)FLAG[5]))
 		width(data);
-	free(tmp);
+	//free(tmp);
 }
 
 void	flag_int(t_printf *data)

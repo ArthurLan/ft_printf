@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 21:50:15 by alanter           #+#    #+#             */
-/*   Updated: 2017/12/03 22:07:14 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/15 17:30:01 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ size_t	ft_strlen(const char *str)
 	size_t len;
 
 	len = 0;
-	while (str[len] != 0)
-		len++;
+	if (str)
+	{
+		while (str[len] != 0)
+			len++;
+	}
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/15 18:39:09 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/18 13:18:36 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	store_di(t_printf *data, va_list lst)
 	else if (SPEC == 2)
 		TO_ADD = ft_itoa((short int)(va_arg(lst, int)));
 	else if (SPEC == 3)
-		TO_ADD = ft_lltoa_base(va_arg(lst, long int), 10);
+		TO_ADD = ft_lltoa_base(va_arg(lst, long long int), 10);
 	else if (SPEC == 4)
 		TO_ADD = ft_lltoa_base(va_arg(lst, long long int), 10);
 	else if (SPEC == 5)

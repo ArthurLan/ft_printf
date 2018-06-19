@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 20:45:14 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/12 18:42:19 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/19 20:10:01 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,5 @@ void			ft_putwstr(char *str);
 int				ft_charwlen(wchar_t c);
 size_t			ft_strwlen(wchar_t *str);
 char    		*ft_wtostr(wchar_t *wstr);
+char 			*ft_ultim_join(char **s1, char **s2, int memlib, int n1, int n2);
 #endif

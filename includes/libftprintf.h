@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:05:12 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/19 20:23:53 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/21 19:12:42 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,33 @@
  * **	CONV	= type conversion "hh, h, l, ll..."
  */
 
+# define RET data->ret
 # define TO_ADD data->to_add
 # define ADD_FLAG data->add_flag
 # define SCAN data->scan
 # define TYPE data->type
 # define FLAG data->flag
 # define SPEC data->spec
+# define NEG data->neg
+# define CZERO data->czero
+# define BACKZ data->backz
 
 typedef struct	s_printf
 {
-	char	*str;
-	char	*result;
-	char	*to_add;
-	char	*add_flag;
-	char	*scan;
-	char	type;
-	int		*flag;
-	int		spec;
-	
-	//int		init;
-	//int		delim;
-	//char	conv;
+	char				*str;
+	char				*ret;
+	char				*to_add;
+	char				*add_flag;
+	char				*scan;
+	char				type;
+	int					*flag;
+	int					spec;
+	int					neg;
+	int					czero;
+	unsigned long long	backz;			
 }				t_printf;
 
 int		ft_printf(const char * format, ...);
 void	convert(t_printf *data, va_list lst, int i, int j);
-void	flags(t_printf *data, int i, int j);
+void	flags(t_printf *data);//, int i, int j);
 #endif

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/19 20:23:44 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/21 19:12:47 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,27 @@ int		ft_is_flag(char c)
 		return (0);
 }
 
+void	back_zero(t_printf *data, int len)
+{
+	if (CZERO > 0)
+		BACKZ = (BACKZ > 0) ? BACKZ + CZERO : ft_strlen(RET) + CZERO;
+	if (BACKZ > 0 && CZERO == 0)
+		BACKZ += len;
+	CZERO = 0;
+}
+
 void	store_cleanstr(t_printf *data, int i, int j)
 {
+	char *tmp;
+	int		len;
+
+	tmp = TO_ADD;
 	TO_ADD = ft_strndup(&(data->str[j]), i - j);
-	if (data->result == NULL)
-		data->result = ft_strdup(TO_ADD);
-	else
-		data->result = ft_strjoin(data->result, TO_ADD);
-		//data->result = ft_strjoinfree(data->result, TO_ADD);
+	len = ft_strlen(TO_ADD);
+	RET = ft_ultim_join(&RET, &TO_ADD, 3, BACKZ, 0);
+	back_zero(data, len);
+	if (tmp != NULL)
+		free(tmp);
 }
 
 /*
@@ -58,8 +71,12 @@ void parsing(t_printf *data, va_list lst)
 			j = i;
 			while (data->str[i] != 0 && ft_is_flag(data->str[i]))
 				i++;
-			i++;
-			convert(data, lst, i, j);
+			if (data->str[i] != 0 && ft_strchr("sSpdDioOuUxXcC%", data->str[i]))
+			{
+				i++;
+				convert(data, lst, i, j);
+				back_zero(data, 0);
+			}
 		}
 	}
 }
@@ -85,16 +102,17 @@ int	ft_printf(const char *format, ...)
 
 	data = ft_memalloc(sizeof(t_printf));
 	data->str = ft_strdup(format);
+	BACKZ = 0;
+	CZERO = 0;
 	va_start(lst, format);
-	//data->result = ft_memalloc(2);
 	parsing(data, lst);
-	/* pour fonction de gestion du flag
-	s = va_arg(ap, char *);
-	*/
-	ft_putstr(data->result);
-	ret = ft_strlen(data->result);
-	if (data->result)
-		free(data->result);
+	if (BACKZ)
+		write(1, RET, BACKZ);
+	else
+		ft_putstr(RET);
+	ret = (BACKZ) ? BACKZ : ft_strlen(RET);
+	if (RET)
+		free(RET);
 	if (data->str)
 		free(data->str);
 	va_end(lst);

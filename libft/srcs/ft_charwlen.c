@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 17:36:44 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/12 18:42:13 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/23 00:34:37 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_charwlen(wchar_t c)
 {
-		if (c <= 0x7F)
-			return (1);
-		else if (c <= 0x7FF)
-			return (2);
-		else if (c <= 0xFFFF)
-			return (3);
-		else if (c <= 0x10FFFF)
-			return (4);
-		else
-			return (0);
+	if (c <= 0x7F)
+		return (1);
+	else if (c <= 0x7FF)
+		return (2);
+	else if (c <= 0xFFFF)
+		return (3);
+	else if (c <= 0x10FFFF)
+		return (4);
+	else
+		return (0);
 }

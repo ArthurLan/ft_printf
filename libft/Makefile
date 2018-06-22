@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/11 21:05:53 by alanter           #+#    #+#              #
-#    Updated: 2018/06/21 19:02:02 by alanter          ###   ########.fr        #
+#    Updated: 2018/06/23 00:04:01 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ ft_isblank ft_strtrimc ft_strndup ft_strnlen \
 ft_putnbr_base ft_ulltoa_base ft_lltoa_base ft_ctostr \
 ft_strjoinfree ft_strupcase ft_putwchar ft_putwstr \
 ft_charwlen ft_strwlen ft_wtostr ft_ultim_join \
-ft_cleanfree ft_atoll
+ft_cleanfree ft_atoll ft_switchar ft_statjoin
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g3
 
 .PHONY: all clean fclean re
 

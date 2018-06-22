@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/22 21:32:19 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/23 01:02:31 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 void	store_di(t_printf *data, va_list lst)
 {
+	ft_cleanfree(&TO_ADD);
 	SPEC = (TYPE == 'D') ? 4 : SPEC;
 	if (SPEC == 0)
 		TO_ADD = ft_itoa(va_arg(lst, int));
@@ -50,6 +51,7 @@ void	store_di(t_printf *data, va_list lst)
 //verifier SPEC 1 et 2, les parentheses
 void	store_uoxp(t_printf *data, va_list lst, int base)
 {
+	ft_cleanfree(&TO_ADD);
 	SPEC = (TYPE == 'O') ? 3 : SPEC;
 	if (SPEC == 0 && TYPE != 'p' && TYPE != 'U')
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned int), base);
@@ -71,6 +73,7 @@ void	store_uoxp(t_printf *data, va_list lst, int base)
 
 void	store_cs(t_printf *data, va_list lst)
 {
+	ft_cleanfree(&TO_ADD);
 	if ((SPEC == 3 && TYPE == 'c') || TYPE == 'C')
 			TO_ADD = ft_ctostr((wint_t)(va_arg(lst, wint_t)));
 	else if ((SPEC == 3 && TYPE == 's') || TYPE == 'S')

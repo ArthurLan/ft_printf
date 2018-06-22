@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 16:26:32 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/21 19:12:34 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/22 23:59:07 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
  * ** Dans le cas où n1 et/ou n2 sont supérieur à 0, la fonction devra conserver la présence du \0 au sein de la string renvoyée, la valeur de n sera alors égale au nombre de caractères présents dans la string à copier contenant le \0.
  * */
 
-char	*ft_strnjoin(char const *s1, char const *s2, int n1, int n2)
+static char		*ft_strnjoin(char const *s1, char const *s2, int n1, int n2)
 {
 	char	*d;
 	int		i;
@@ -48,7 +48,7 @@ char	*ft_strnjoin(char const *s1, char const *s2, int n1, int n2)
 	return (d);
 }
 
-char *ft_sort_null(char *s1, char *s2, int n1, int n2)
+static char 	*ft_sort_null(char *s1, char *s2, int n1, int n2)
 {
 	char *str;
 
@@ -65,7 +65,7 @@ char *ft_sort_null(char *s1, char *s2, int n1, int n2)
 	return (str);
 }
 
-char *ft_ultim_join(char **s1, char **s2, int memlib, int n1, int n2)
+char 			*ft_ultim_join(char **s1, char **s2, int memlib, int n1, int n2)
 {
 	char *str;
 	

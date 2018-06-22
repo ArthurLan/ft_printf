@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 23:47:56 by alanter           #+#    #+#             */
-/*   Updated: 2017/11/29 21:35:47 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/23 00:48:26 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ char			*ft_itoa(int n)
 	int		i;
 
 	i = size_itoa(n) - 1;
-	if (!(ret = (char*)malloc(sizeof(char) * size_itoa(n) + 1)))
-		return (NULL);
-	ret[i + 1] = 0;
+	ret = ft_memalloc(size_itoa(n) + 1);
 	if (n < 0)
 		return (ft_itoa_neg(ret, i, n));
 	else

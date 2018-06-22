@@ -6,13 +6,11 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 18:01:42 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/22 20:50:35 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/23 01:02:03 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-//Gérer l'incrémemtation de wstr !
 
 void	storew(wchar_t *wstr, char *str, size_t size, int i)
 {
@@ -22,27 +20,27 @@ void	storew(wchar_t *wstr, char *str, size_t size, int i)
 			str[i++] = *wstr;
 		else if (size-- && *wstr <= 0x7FF)
 		{
-			str[i++] =((*wstr >> 6) | 0xC0);
-			str[i++] =((*wstr & 0x3F) | 0x80);
+			str[i++] = ((*wstr >> 6) | 0xC0);
+			str[i++] = ((*wstr & 0x3F) | 0x80);
 		}
 		else if (size-- && *wstr <= 0xFFFF)
 		{
-			str[i++] =((*wstr >> 12) | 0xE0);
-			str[i++] =(((*wstr >> 6) & 0x3F) | 0x80);
-			str[i++] =((*wstr & 0x3F) | 0x80);
+			str[i++] = ((*wstr >> 12) | 0xE0);
+			str[i++] = (((*wstr >> 6) & 0x3F) | 0x80);
+			str[i++] = ((*wstr & 0x3F) | 0x80);
 		}
 		else if (size-- && *wstr <= 0x10FFFF)
 		{
-			str[i++] =((*wstr >> 18) | 0xF0);
-			str[i++] =(((*wstr >> 12) & 0x3F) | 0x80);
-			str[i++] =(((*wstr >> 6) & 0x3F) | 0x80);
-			str[i++] =((*wstr & 0x3F) | 0x80);
+			str[i++] = ((*wstr >> 18) | 0xF0);
+			str[i++] = (((*wstr >> 12) & 0x3F) | 0x80);
+			str[i++] = (((*wstr >> 6) & 0x3F) | 0x80);
+			str[i++] = ((*wstr & 0x3F) | 0x80);
 		}
 		wstr++;
 	}
 }
 
-char 	*ft_wtostr(wchar_t *wstr)
+char	*ft_wtostr(wchar_t *wstr)
 {
 	size_t	size;
 	char	*str;

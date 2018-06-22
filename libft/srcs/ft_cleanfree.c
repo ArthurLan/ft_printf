@@ -6,14 +6,15 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 14:30:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/21 14:38:27 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/23 00:44:32 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* ** En faire une fonction variadique !
- */
+/*
+** En faire une fonction variadique !
+*/
 
 void	ft_cleanfree(char **s1)
 {

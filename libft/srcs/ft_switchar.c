@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strupcase.c                                     :+:      :+:    :+:   */
+/*   ft_switchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/23 00:57:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/23 00:57:39 by alanter          ###   ########.fr       */
+/*   Created: 2018/06/22 21:53:43 by alanter           #+#    #+#             */
+/*   Updated: 2018/06/23 00:59:05 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strupcase(char *str)
-{
-	int	i;
+/* Permet d'échanger deux charactères au sein d'une string 
+** ou entre deux string en envoyant leurs adresses respectives
+*/
 
-	i = 0;
-	while (str[i] != 0)
+void	ft_switchar(char *c1, char *c2)
+{
+	char tmp;
+
+	tmp = 0;
+	if (c1 && c2)
 	{
-		str[i] = ft_toupper(str[i]);
-		i++;
+		tmp = *c2;
+		*c2 = *c1;
+		*c1 = tmp;
 	}
-}
+}	

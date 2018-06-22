@@ -6,15 +6,16 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 15:17:26 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/14 02:07:02 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/23 00:56:51 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
- * ** ATTENTION : ONLY USE WITH ALLOCATED CHAR* WITH MALLOC
- * */
+** ATTENTION : ONLY USE WITH ALLOCATED CHAR* WITH MALLOC
+** Vérifier fonctionnement (fin printf)
+*/
 
 char	*ft_strjoinfree(char *s1, char *s2)
 {
@@ -29,17 +30,10 @@ char	*ft_strjoinfree(char *s1, char *s2)
 	if (!(d = (char *)malloc(sizeof(char)
 					* (ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (NULL);
-	while (s1[i] != 0)
-	{
+	while (s1[i++] != 0)
 		d[i] = s1[i];
-		i++;
-	}
 	while (s2[j] != 0)
-	{
-		d[i] = s2[j];
-		i++;
-		j++;
-	}
+		d[i++] = s2[j++];
 	d[i] = 0;
 	if (s1 != NULL)
 		free(s1);

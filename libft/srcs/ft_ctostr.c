@@ -6,13 +6,13 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 15:24:10 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/01 15:29:48 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/23 00:47:51 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_ctostr(char c)
+char	*ft_ctostr(char c)
 {
 	char *str;
 

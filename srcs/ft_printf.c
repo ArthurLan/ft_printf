@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:18:36 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/22 21:32:23 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/23 01:02:29 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	back_zero(t_printf *data, int len)
 
 void	store_cleanstr(t_printf *data, int i, int j)
 {
-	char *tmp;
+	char	*tmp;
 	int		len;
 
 	tmp = TO_ADD;
@@ -43,15 +43,15 @@ void	store_cleanstr(t_printf *data, int i, int j)
 		free(tmp);
 }
 
-/*
- * Fonction en charge du contenu
- *
- * Store les différentes parties dans le result
- *
- * retourne le result à ft_printf
+/* **
+ * ** Fonction en charge du contenu
+ * **
+ * ** Store les différentes parties dans le result
+ * **
+ * ** retourne le result à ft_printf
 */
 
-void parsing(t_printf *data, va_list lst)
+void	parsing(t_printf *data, va_list lst)
 {
 	int		i;
 	int		j;
@@ -73,8 +73,7 @@ void parsing(t_printf *data, va_list lst)
 				i++;
 			if (data->str[i] != 0 && ft_strchr("sSpdDioOuUxXcC%", data->str[i]))
 			{
-				i++;
-				convert(data, lst, i, j);
+				convert(data, lst, ++i, j);
 				back_zero(data, 0);
 			}
 		}
@@ -82,19 +81,19 @@ void parsing(t_printf *data, va_list lst)
 }
 
 
-/*		Initialise la struct contenant :
- * la str 'format'
- * le resultat final à print
- * les delimiteurs des arguments au sein de format
- *
- * 		Initialise la va_list, pour gérer les arguments de la fct variadique
- * 
- *		Renvoie vers la fonction en charge de gérer le contenu de format
- *
- * 		Retourne la taille du resultat final
+/* **	Initialise la struct contenant :
+ * ** la str 'format'
+ * ** le resultat final à print
+ * ** les delimiteurs des arguments au sein de format
+ * **
+ * ** Initialise la va_list, pour gérer les arguments de la fct variadique
+ * **
+ * ** Renvoie vers la fonction en charge de gérer le contenu de format
+ * **
+ * ** Retourne la taille du resultat final
 */
 
-int	ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list lst;
 	t_printf *data;
@@ -115,6 +114,7 @@ int	ft_printf(const char *format, ...)
 		free(RET);
 	if (data->str)
 		free(data->str);
+	free(data);
 	va_end(lst);
 	return (ret);
 }

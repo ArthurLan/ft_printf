@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/22 21:29:49 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/22 21:32:19 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,5 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 		TO_ADD = ft_strdup("%");
 	flags(data);
 	RET = ft_ultim_join(&RET, &TO_ADD, 3, BACKZ, CZERO);
-	ft_putendl(RET);
 	ft_cleanfree(&SCAN);
 }

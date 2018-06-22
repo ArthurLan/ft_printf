@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 17:36:34 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/12 18:42:07 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/22 20:44:51 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ size_t	ft_strwlen(wchar_t *str)
 
 	len = 0;
 	i = 0;
-	while (str[i] != 0)
+	if (str != NULL)
 	{
-		len += ft_charwlen(str[i]);
-		i++;
+		while (str[i] != 0)
+		{
+			len += ft_charwlen(str[i]);
+			i++;
+		}
 	}
 	return (len);
 }

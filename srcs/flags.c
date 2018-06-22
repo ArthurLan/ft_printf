@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 17:36:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/21 19:12:51 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/22 21:29:57 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	scan_flag(t_printf *data, char *scan)
 			state = (*scan == '.' && state < 2) ? 2 : state;
 			if (*scan == '#')
 				FLAG[0] = 1;
-			else if (*scan == '+' && ft_atoi(TO_ADD) >= 0)
+			else if (*scan == '+' && !(NEG))
 				FLAG[1] = 1;
 			else if (*scan == ' ' && (ft_strchr(SCAN, '+') == NULL))
 				FLAG[2] = 1;
-			else if (*scan == '-')// && (FLAG[4] = 0))
+			else if (*scan == '-')
 				FLAG[3] = 1;
 			else if (state == 0 && *scan == '0' && (ft_strchr(SCAN, '-') == NULL))
 				FLAG[4] = 1;
@@ -58,14 +58,10 @@ void	width(t_printf *data)
 	int zero_space;	
 	char	*sharp;
 
-	FLAG[4] = (FLAG[6] < FLAG[5] && ft_atoi(TO_ADD) >= 0 && FLAG[6] > 0) ? 0 : FLAG[4];
-	//			ft_putnbr(FLAG[5]);
-	//			ft_putnbr(FLAG[6]);
+	FLAG[4] = (FLAG[6] < FLAG[5] && !(NEG) && FLAG[6] > 0) ? 0 : FLAG[4];
 	zero_space = (FLAG[4] == 1) ? '0' : ' ';
 	ADD_FLAG = ft_memalloc(FLAG[5] - ft_strlen(TO_ADD) + 1);
 	ADD_FLAG = ft_memset(ADD_FLAG, zero_space, FLAG[5] - ft_strlen(TO_ADD));
-	//			ft_putendl(TO_ADD);
-	//			ft_putendl(ADD_FLAG);
 	if (FLAG[3] == 0) 
 		TO_ADD = ft_ultim_join(&ADD_FLAG, &TO_ADD, 3, 0, 0);
 	else
@@ -80,6 +76,7 @@ void	width(t_printf *data)
 		*sharp = '0';
 		*(ft_strchr(TO_ADD, '0')) = '+';
 	}
+	//CZERO = (CZERO) ? FLAG[5] : 0;
 	//free(ADD_FLAG);
 }
 
@@ -105,7 +102,6 @@ void	flag_int(t_printf *data)
 			TO_ADD = ft_strjoin("0", TO_ADD);
 	if (FLAG[6] > 0 && FLAG[6] > (int)ft_strlen(TO_ADD))
 	{
-		//si d neg -> ajouter 1
 			ADD_FLAG = ft_memalloc(FLAG[6] - ft_strlen(TO_ADD) + 1 + NEG);
 			ADD_FLAG = ft_memset(ADD_FLAG, '0', FLAG[6] - ft_strlen(TO_ADD) + NEG);
 			TO_ADD = ft_ultim_join(&ADD_FLAG, &TO_ADD, 3, 0, 0);
@@ -127,9 +123,10 @@ void	flag_int(t_printf *data)
 		width(data);
 }
 
-void	flags(t_printf *data)//, int i, int j)
+void	flags(t_printf *data)
 {
-char *sharp;
+	char *minus;
+
 	FLAG = ft_memalloc(sizeof(int) * 8);
 	if (ft_strlen(SCAN) > 1 || TYPE == 'p')
 	{
@@ -137,10 +134,9 @@ char *sharp;
 		if (ft_strchr("idDuUoOxXp", TYPE))
 			flag_int(data);
 	}
-	
-	if ((sharp = ft_strchr(TO_ADD, '-')))
+	if ((minus = ft_strchr(TO_ADD, '-')))
 	{
-		*sharp = '0';
+		*minus = '0';
 		*(ft_strchr(TO_ADD, '0')) = '-';
 	}
 

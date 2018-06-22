@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 18:01:42 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/13 15:27:12 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/22 20:50:35 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ char 	*ft_wtostr(wchar_t *wstr)
 
 	i = 0;
 	size = ft_strwlen(wstr);
-	str = (char *)ft_memalloc(size + 1);
-	storew(wstr, str, size, i);
+	str = NULL;
+	if (wstr)
+	{
+		str = (char *)ft_memalloc(size + 1);
+		storew(wstr, str, size, i);
+	}
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/21 19:12:49 by alanter          ###   ########.fr       */
+/*   Updated: 2018/06/22 21:29:49 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 void	store_di(t_printf *data, va_list lst)
 {
+	SPEC = (TYPE == 'D') ? 4 : SPEC;
 	if (SPEC == 0)
 		TO_ADD = ft_itoa(va_arg(lst, int));
 	else if (SPEC == 1)
@@ -49,7 +50,8 @@ void	store_di(t_printf *data, va_list lst)
 //verifier SPEC 1 et 2, les parentheses
 void	store_uoxp(t_printf *data, va_list lst, int base)
 {
-	if (SPEC == 0 && TYPE != 'p')
+	SPEC = (TYPE == 'O') ? 3 : SPEC;
+	if (SPEC == 0 && TYPE != 'p' && TYPE != 'U')
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned int), base);
 	else if (SPEC == 1 && TYPE != 'U')
 		TO_ADD = ft_ulltoa_base((unsigned char)(va_arg(lst, int)), base);
@@ -58,7 +60,9 @@ void	store_uoxp(t_printf *data, va_list lst, int base)
 	else if (SPEC == 3 || TYPE == 'p')
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned long int), base);
 	else if (SPEC == 4 || TYPE == 'U')
+	{
 		TO_ADD = ft_ulltoa_base(va_arg(lst, unsigned long long int), base);
+	}
 	else if (SPEC == 5)
 		TO_ADD = ft_ulltoa_base(va_arg(lst, uintmax_t), base);
 	else if (SPEC == 6)
@@ -107,6 +111,7 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	int base;
 
 	SPEC = 0;
+	NEG = 0;
 	TYPE = data->str[i - 1];
 	base = (ft_strchr("oO", TYPE)) ? 8 : (base = (ft_strchr("xXp", TYPE)) ? 16 : 10);
 	SCAN = ft_strndup(&(data->str[j]), i-j);
@@ -122,5 +127,6 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 		TO_ADD = ft_strdup("%");
 	flags(data);
 	RET = ft_ultim_join(&RET, &TO_ADD, 3, BACKZ, CZERO);
+	ft_putendl(RET);
 	ft_cleanfree(&SCAN);
 }

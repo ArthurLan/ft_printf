@@ -6,26 +6,22 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:43:17 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/23 01:02:31 by alanter          ###   ########.fr       */
+/*   Updated: 2018/07/10 18:18:30 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
-/*penser à la lecture du va_arg dans un autre fichier :
- * fonctionne comme une variable statique ? ou stack ?
-*/
+#include "ft_printf.h"
 
 /*
- * ** ---- SPEC = int to deal with specifiers ----
- * **
- * **---- hh	1
- * **---- h		2
- * **---- l		3
- * **---- ll	4
- * **---- j		5
- * **---- z		6
- * */
+** ---- SPEC = int to deal with specifiers ----
+**
+**---- hh	1
+**---- h	2
+**---- l	3
+**---- ll	4
+**---- j	5
+**---- z	6
+*/
 
 void	store_di(t_printf *data, va_list lst)
 {
@@ -48,7 +44,6 @@ void	store_di(t_printf *data, va_list lst)
 	NEG = (ft_atoll(TO_ADD) < 0) ? 1 : 0;
 }
 
-//verifier SPEC 1 et 2, les parentheses
 void	store_uoxp(t_printf *data, va_list lst, int base)
 {
 	ft_cleanfree(&TO_ADD);
@@ -75,13 +70,13 @@ void	store_cs(t_printf *data, va_list lst)
 {
 	ft_cleanfree(&TO_ADD);
 	if ((SPEC == 3 && TYPE == 'c') || TYPE == 'C')
-			TO_ADD = ft_ctostr((wint_t)(va_arg(lst, wint_t)));
+		TO_ADD = ft_ctostr((wint_t)(va_arg(lst, wint_t)));
 	else if ((SPEC == 3 && TYPE == 's') || TYPE == 'S')
-			TO_ADD = ft_wtostr(va_arg(lst, wchar_t *));
+		TO_ADD = ft_wtostr(va_arg(lst, wchar_t *));
 	else if (TYPE == 'c')
-			TO_ADD = ft_ctostr((char)(va_arg(lst, int)));
+		TO_ADD = ft_ctostr((char)(va_arg(lst, int)));
 	else
-			TO_ADD = ft_strdup(va_arg(lst, char *));
+		TO_ADD = ft_strdup(va_arg(lst, char *));
 	if (TO_ADD == NULL && ft_strchr("sS", TYPE))
 		TO_ADD = ft_strdup("(null)");
 	if (*TO_ADD == 0 && ft_strchr("cC", TYPE))
@@ -91,6 +86,7 @@ void	store_cs(t_printf *data, va_list lst)
 void	type_analyse(t_printf *data, int i, int j)
 {
 	char *tmp;
+
 	SPEC = 0;
 	tmp = SCAN;
 	while (j < i && SPEC == 0)
@@ -116,8 +112,11 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	SPEC = 0;
 	NEG = 0;
 	TYPE = data->str[i - 1];
-	base = (ft_strchr("oO", TYPE)) ? 8 : (base = (ft_strchr("xXp", TYPE)) ? 16 : 10);
-	SCAN = ft_strndup(&(data->str[j]), i-j);
+	if (ft_strchr("oO", TYPE))
+		base = 8;
+	else
+		base = (ft_strchr("xXp", TYPE)) ? 16 : 10;
+	SCAN = ft_strndup(&(data->str[j]), i - j);
 	if (ft_strlen(SCAN) > 1)
 		type_analyse(data, i, j);
 	if (TYPE == 's' || TYPE == 'S' || TYPE == 'c' || TYPE == 'C')
@@ -129,6 +128,6 @@ void	convert(t_printf *data, va_list lst, int i, int j)
 	else if (TYPE == '%')
 		TO_ADD = ft_strdup("%");
 	flags(data);
-	RET = ft_ultim_join(&RET, &TO_ADD, 3, BACKZ, CZERO);
+	RET = ft_ultim_join(&RET, &TO_ADD, BACKZ, CZERO);
 	ft_cleanfree(&SCAN);
 }

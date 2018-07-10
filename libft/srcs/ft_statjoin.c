@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 23:59:45 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/23 00:54:42 by alanter          ###   ########.fr       */
+/*   Updated: 2018/07/10 18:14:48 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static char		*ft_sort_null(char *s1, char *s2, int n1, int n2)
 	return (str);
 }
 
-char			*ft_statjoin(char *s1, char **s2, int memlib, int n1, int n2)
+char			*ft_statjoin(char *s1, char **s2, int n1, int n2)
 {
 	char *str;
 
 	str = ft_sort_null(s1, *s2, n1, n2);
-	if (*s2 != NULL && (memlib == 2 || memlib == 3))
+	if (*s2 != NULL)
 	{
 		free(*s2);
 		*s2 = NULL;

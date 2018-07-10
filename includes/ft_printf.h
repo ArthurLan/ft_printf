@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:05:12 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/23 01:02:38 by alanter          ###   ########.fr       */
+/*   Updated: 2018/07/10 18:15:56 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 # include "../libft/includes/libft.h"
 # include <wchar.h>
 
-/* **
- * **	-- Every macro is used to access data structure MAJ = data->maj --
- * **
- * ** 	TO_ADD	= STR TO JOIN TO RESULT
- * ** 	SCAN 	= data to analyse, ex : %-.9d
- * **	TYPE	= type from SCAN,  ex : d
- * **	FLAG	= flag "#+ -0" precision and padding, ex : -.9
- * **	CONV	= type conversion "hh, h, l, ll..."
+/*
+**	-- Every macro is used to access data structure MAJ = data->maj --
+**
+** 	TO_ADD	= STR TO JOIN TO RESULT
+** 	SCAN 	= data to analyse, ex : %-.9d
+**	TYPE	= type from SCAN,  ex : d
+**	FLAG	= flag "#+ -0" precision and padding, ex : -.9
+**	CONV	= type conversion "hh, h, l, ll..."
 */
 
 # define RET data->ret
@@ -56,4 +56,5 @@ typedef struct	s_printf
 int				ft_printf(const char *format, ...);
 void			convert(t_printf *data, va_list lst, int i, int j);
 void			flags(t_printf *data);
+
 #endif

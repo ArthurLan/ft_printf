@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 16:20:18 by alanter           #+#    #+#             */
-/*   Updated: 2018/06/23 01:00:49 by alanter          ###   ########.fr       */
+/*   Updated: 2018/07/10 17:40:30 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char			*ft_ulltoa_base(unsigned long long n, int base)
 	while (i != -1)
 	{
 		if ((n % base) < 10)
-		ret[i] = '0' + (n % base);
+			ret[i] = '0' + (n % base);
 		else
-		ret[i] = 87 + (n % base);
+			ret[i] = 87 + (n % base);
 		n /= base;
 		i--;
 	}

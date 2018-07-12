@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/11 21:05:53 by alanter           #+#    #+#              #
-#    Updated: 2018/07/12 15:57:35 by alanter          ###   ########.fr        #
+#    Updated: 2018/07/12 19:28:28 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,11 +51,13 @@ LIBFTOF = $(patsubst %, $(LIBFTO)%.o, $(LIBFTF))
 all : $(NAME)
 
 $(LIBFT): $(LIBFTCF)
+	mkdir -p $(LIBFTO)
 	gcc $(CFLAGS) -c -I$(LIBFTI) $(LIBFTCF)
 	mv *.o $(LIBFTO)
 	ar -rc $(LIBFT) $(LIBFTOF)
 
 $(OFILES): $(CFILES)
+	mkdir -p $(O_DIR)
 	gcc $(CFLAGS) -c -I$(INCLUDE) $(CFILES)
 	mv *.o $(O_DIR)
 
